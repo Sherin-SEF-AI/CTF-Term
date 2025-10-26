@@ -23,16 +23,21 @@
 
 ### Installation
 
+**Recommended** - Using pipx (isolated environment):
 ```bash
 pipx install ctf-term
 ```
 
-Or from source:
-
+**Alternative** - Using pip:
 ```bash
-git clone <repo>
-cd ctf-term
-pipx install .
+pip install ctf-term
+```
+
+**From source**:
+```bash
+git clone https://github.com/Sherin-SEF-AI/CTF-Term.git
+cd CTF-Term
+pip install -e .
 ```
 
 ### CLI Usage
