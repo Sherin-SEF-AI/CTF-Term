@@ -1,0 +1,23 @@
+============================================================================
+🚀 UPLOAD CTF TERMINAL TO PyPI - RUN THIS COMMAND
+============================================================================
+
+cd /home/vision2030/Desktop/ctf && twine upload dist/*
+
+============================================================================
+You will be prompted for credentials:
+- Username: __token__ (for API token) or your PyPI username  
+- Password: Your PyPI API token or password
+
+============================================================================
+GET API TOKEN (Recommended):
+1. Visit: https://pypi.org/manage/account/token/
+2. Create new token
+3. Copy the token
+4. Use it as password when prompted
+
+============================================================================
+OR USE THE SCRIPT:
+./upload_pypi_now.sh
+
+============================================================================
