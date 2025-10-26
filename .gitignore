@@ -56,6 +56,7 @@ Thumbs.db
 # Build artifacts
 *.whl
 *.tar.gz
+# dist/  # Uncomment if you don't want to track dist
 
 # Documentation
 docs/_build/
