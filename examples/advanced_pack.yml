@@ -1,0 +1,408 @@
+pack: Advanced CTF Challenges
+version: 1
+challenges:
+  # Cryptography Challenges
+  - id: rsa-broken-key
+    title: Broken RSA Key
+    category: crypto
+    description: |
+      Your friend sent you an encrypted message using RSA, but they made a mistake generating the key.
+      
+      Public key:
+      e = 65537
+      n = 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654000350692006139
+      
+      Ciphertext: 9675156813294126943374763800992694264608531357488871982031662984925956652944
+      
+      Hint: Small prime factors...
+    points: 300
+    hint: The modulus n is factorable. Try Fermat's factorization method.
+    hint_penalty: 50
+    salt: "rsa1"
+    flag_plain: 'flag{rsa_is_secure_if_big_primes}'
+
+  - id: aes-ecb-mode
+    title: ECB Mode Vulnerabilities
+    category: crypto
+    description: |
+      AES in ECB mode can be vulnerable. Decrypt this base64 encoded ciphertext:
+      
+      U2FsdGVkX1+8xr8vQ3PZ6LKJ5yqN2mBhKlPzWYvF
+      
+      The key is "ECBisweak" and the encryption was done using AES-256-ECB.
+    points: 250
+    hint: AES ECB mode encrypts each block independently without chaining.
+    hint_penalty: 40
+    salt: "aes1"
+    flag_plain: 'flag{ecb_mode_reveals_patterns}'
+
+  - id: hash-collision
+    title: Hash Collision Attack
+    category: crypto
+    description: |
+      SHA256 hash: 7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730
+      
+      Find a message that collides with "admin_password_12345"
+    points: 400
+    hint: Look for weaknesses in SHA256 implementation when given constrained input.
+    hint_penalty: 75
+    salt: "hash1"
+    flag_plain: 'flag{sha256_birthday_attack}'
+
+  # Web Security Challenges
+  - id: sql-injection-bypass
+    title: SQL Injection Bypass
+    category: web
+    description: |
+      Login page SQL query:
+      SELECT * FROM users WHERE username='$username' AND password='$password'
+      
+      Bypass authentication without knowing any passwords.
+      Username: admin
+    points: 350
+    hint: SQL comments can bypass authentication checks.
+    hint_penalty: 60
+    salt: "sql1"
+    flag_plain: 'flag{admin_or_1_equals_1}'
+
+  - id: xss-reflected
+    title: Reflected XSS
+    category: web
+    description: |
+      Vulnerable search parameter: /search?q=<your_payload>
+      
+      Inject JavaScript to trigger alert(document.domain)
+    points: 300
+    hint: HTML entities and JavaScript injection techniques.
+    hint_penalty: 50
+    salt: "xss1"
+    flag_plain: 'flag{xss_execution_detected}'
+
+  - id: jwt-token-forge
+    title: JWT Token Forgery
+    category: web
+    description: |
+      Your current JWT token:
+      eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VyIjoiZ3Vlc3QiLCJyb2xlIjoiY29tbW9uIn0
+      
+      Forge a token to get admin access.
+    points: 400
+    hint: Check the algorithm being used. Some implementations accept 'none'.
+    hint_penalty: 75
+    salt: "jwt1"
+    flag_plain: 'flag{none_algorithm_vulnerability}'
+
+  # Reverse Engineering Challenges
+  - id: crackme-x86
+    title: x86 Crackme
+    category: pwn
+    description: |
+      Binary: crackme.bin
+      
+      Find the correct input to unlock the program.
+      It checks a key and prints "Access Granted!"
+    points: 350
+    hint: Use objdump or Ghidra to reverse engineer the key check routine.
+    hint_penalty: 60
+    salt: "rev1"
+    flag_plain: 'flag{my_p4ssw0rd_is_s3cr3t}'
+
+  - id: buffer-overflow-ret2win
+    title: Return to Win Function
+    category: pwn
+    description: |
+      Program: vuln_server
+      
+      Exploit the buffer overflow to call the hidden win() function.
+      Find the win function address: 0x401156
+    points: 400
+    hint: Return address overwrite at offset 40 bytes.
+    hint_penalty: 70
+    salt: "pwn1"
+    flag_plain: 'flag{ret2win_exploit_success}'
+
+  - id: format-string-bug
+    title: Format String Vulnerability
+    category: pwn
+    description: |
+      Program: fmt_bug
+      
+      Exploit printf format string to read a secret value from memory.
+      Address: 0x401234
+    points: 450
+    hint: Use %x or %p to leak memory addresses.
+    hint_penalty: 80
+    salt: "fmt1"
+    flag_plain: 'flag{format_string_leak}'
+
+  # Forensics Challenges
+  - id: pcap-analysis
+    title: Network Packet Analysis
+    category: forensics
+    description: |
+      Capture file: network_traffic.pcap
+      
+      An attacker exfiltrated data through DNS queries.
+      Find the exfiltrated information.
+    points: 300
+    hint: Look for DNS TXT records and unusual query patterns.
+    hint_penalty: 50
+    salt: "for1"
+    flag_plain: 'flag{dns_exfiltration_detected}'
+
+  - id: memory-dump-analysis
+    title: Memory Dump Analysis
+    category: forensics
+    description: |
+      Memory dump: system.raw
+      
+      Find the password the user typed before system compromise.
+      Username: administrator
+    points: 400
+    hint: Use strings and grep to find passwords in memory dumps.
+    hint_penalty: 70
+    salt: "for2"
+    flag_plain: 'flag{memory_forensics_password}'
+
+  - id: deleted-file-recovery
+    title: Deleted File Recovery
+    category: forensics
+    description: |
+      Disk image: evidence.dd
+      
+      A file was deleted. Recover its contents.
+      File name starts with "secret"
+    points: 350
+    hint: Use testdisk or photorec to recover deleted files.
+    hint_penalty: 60
+    salt: "for3"
+    flag_plain: 'flag{deleted_files_not_gone}'
+
+  # Steganography Challenges
+  - id: image-stego-lsb
+    title: LSB Steganography
+    category: misc
+    description: |
+      Image: photo.png
+      
+      Hidden message embedded using LSB (Least Significant Bit) steganography.
+      Extract the message.
+    points: 250
+    hint: Use steghide or stegsolve to extract hidden data.
+    hint_penalty: 40
+    salt: "steg1"
+    flag_plain: 'flag{lsb_steganography_hidden}'
+
+  - id: audio-spectrogram
+    title: Audio Steganography
+    category: misc
+    description: |
+      Audio file: song.wav
+      
+      The flag is hidden in the audio file's spectrogram.
+    points: 300
+    hint: Visualize the audio spectrum using Audacity or Sonic Visualiser.
+    hint_penalty: 50
+    salt: "steg2"
+    flag_plain: 'flag{spectrogram_visual_flags}'
+
+  # Privilege Escalation
+  - id: suid-binary
+    title: SUID Binary Exploit
+    category: pwn
+    description: |
+      Binary: /usr/bin/suid_bin
+      
+      Exploit the SUID binary to escalate privileges.
+      Get root shell.
+    points: 500
+    hint: The binary runs as root but executes user input unsafely.
+    hint_penalty: 100
+    salt: "priv1"
+    flag_plain: 'flag{suid_privilege_escalation}'
+
+  - id: sudo-wildcard
+    title: Sudo Wildcard Exploitation
+    category: pwn
+    description: |
+      sudo -l shows:
+      (ALL) NOPASSWD: /usr/bin/cat /var/log/*
+      
+      Exploit wildcard to read /etc/shadow
+    points: 450
+    hint: Wildcards in sudo rules can be exploited with shell globbing.
+    hint_penalty: 85
+    salt: "priv2"
+    flag_plain: 'flag{wildcard_sudo_bypass}'
+
+  # Advanced Cryptography
+  - id: diffie-hellman-small-prime
+    title: Weak Diffie-Hellman
+    category: crypto
+    description: |
+      Diffie-Hellman key exchange with weak parameters:
+      p = 23 (prime)
+      g = 5 (generator)
+      
+      Alice's public key: A = 8
+      Bob's public key: B = 19
+      
+      Find the shared secret.
+    points: 350
+    hint: Small p makes discrete log computation feasible.
+    hint_penalty: 60
+    salt: "dh1"
+    flag_plain: 'flag{dh_small_prime_vulnerable}'
+
+  - id: elliptic-curve-crack
+    title: Elliptic Curve Crypto Crack
+    category: crypto
+    description: |
+      ECC point on curve y^2 = x^3 + 7 (mod 23)
+      Public key: (15, 16)
+      
+      Find the private key (k such that kG = public_key)
+    points: 400
+    hint: Small curve makes brute force possible.
+    hint_penalty: 75
+    salt: "ecc1"
+    flag_plain: 'flag{ecc_small_curve_break}'
+
+  # Network Security
+  - id: man-in-the-middle
+    title: Man-in-the-Middle Attack
+    category: misc
+    description: |
+      Network: mitm_test
+      
+      Intercept and decrypt HTTPS traffic.
+      Attacker has access to router.
+    points: 450
+    hint: Use ARP spoofing and SSL stripping to intercept HTTPS.
+    hint_penalty: 80
+    salt: "net1"
+    flag_plain: 'flag{mitm_https_intercepted}'
+
+  - id: arp-poisoning
+    title: ARP Poisoning Attack
+    category: misc
+    description: |
+      Network: target_network
+      
+      Poison ARP cache to intercept traffic between two hosts.
+    points: 400
+    hint: Use ettercap or arpspoof to poison ARP tables.
+    hint_penalty: 70
+    salt: "net2"
+    flag_plain: 'flag{arp_cache_poisoned}'
+
+  # Advanced Web Exploitation
+  - id: csrf-protection-bypass
+    title: CSRF Protection Bypass
+    category: web
+    description: |
+      Vulnerable form at /transfer_money
+      
+      Bypass CSRF token validation to execute unauthorized transfer.
+    points: 400
+    hint: CSRF tokens can sometimes be predicted or reused.
+    hint_penalty: 75
+    salt: "csrf1"
+    flag_plain: 'flag{csrf_token_predicted}'
+
+  - id: path-traversal
+    title: Directory Traversal
+    category: web
+    description: |
+      Vulnerable file server: /download?file=example.txt
+      
+      Access /etc/passwd using path traversal.
+    points: 300
+    hint: Use .. characters to navigate parent directories.
+    hint_penalty: 50
+    salt: "path1"
+    flag_plain: 'flag{path_traversal_success}'
+
+  - id: template-injection
+    title: Server-Side Template Injection
+    category: web
+    description: |
+      Vulnerable endpoint: /render?template={{user_input}}
+      
+      Inject Python code to execute commands.
+    points: 450
+    hint: Jinja2 templates allow code execution with {{}} syntax.
+    hint_penalty: 85
+    salt: "ssti1"
+    flag_plain: 'flag{ssti_code_execution}'
+
+  # Reverse Engineering - Advanced
+  - id: anti-debugging-bypass
+    title: Anti-Debugging Bypass
+    category: pwn
+    description: |
+      Binary: protected_app
+      
+      The binary detects debuggers. Bypass anti-debugging and crack the key.
+    points: 500
+    hint: Use LD_PRELOAD or ptrace techniques to bypass debugger detection.
+    hint_penalty: 100
+    salt: "antidbg1"
+    flag_plain: 'flag{anti_debugging_bypassed}'
+
+  - id: code-obfuscation-reverse
+    title: Deobfuscate Python Script
+    category: pwn
+    description: |
+      Obfuscated Python: obfuscated.py
+      
+      Deobfuscate and find the secret key.
+    points: 350
+    hint: Python bytecode can be decompiled. Check for easy-to-reverse obfuscation.
+    hint_penalty: 60
+    salt: "pyrev1"
+    flag_plain: 'flag{python_deobfuscated}'
+
+  # Steganography - Advanced
+  - id: multi-layer-stego
+    title: Multi-Layer Steganography
+    category: misc
+    description: |
+      File: complex_stego.zip
+      
+      Multiple layers of steganography hide the flag.
+      ZIP file contains PNG which contains another layer.
+    points: 400
+    hint: 'Extract recursively: ZIP -> PNG -> hidden text in EXIF/metadata.'
+    hint_penalty: 70
+    salt: "multisteg1"
+    flag_plain: 'flag{multi_layer_steganography}'
+
+  # Forensics - Advanced
+  - id: registry-analysis
+    title: Windows Registry Forensics
+    category: forensics
+    description: |
+      Registry hive: SYSTEM.hiv
+      
+      Find evidence of malware persistence.
+      Check Run keys.
+    points: 350
+    hint: Use regedit or Registry Editor to examine persistence mechanisms.
+    hint_penalty: 60
+    salt: "reg1"
+    flag_plain: 'flag{registry_persistence_found}'
+
+  - id: log-analysis-bruteforce
+    title: Log Analysis - Brute Force Attack
+    category: forensics
+    description: |
+      Log file: auth.log
+      
+      Analyze failed login attempts to find the attacker's IP.
+    points: 300
+    hint: Look for repeated failed authentication attempts from same IP.
+    hint_penalty: 50
+    salt: "log1"
+    flag_plain: 'flag{bruteforce_ip_detected}'
+

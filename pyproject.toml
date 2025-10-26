@@ -1,0 +1,104 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ctf-term"
+version = "0.1.0"
+description = "A terminal-based CTF (Capture The Flag) engine with CLI and TUI interfaces for cybersecurity training"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Sherin Joseph Roy", email = "contact@sherinjosephroy.link" }
+]
+maintainers = [
+    { name = "Sherin Joseph Roy", email = "contact@sherinjosephroy.link" }
+]
+keywords = [
+    "ctf",
+    "capture-the-flag",
+    "cybersecurity",
+    "security-training",
+    "cli",
+    "tui",
+    "terminal",
+    "textual",
+    "typer",
+    "python",
+    "pentesting",
+    "hacking",
+    "challenges",
+    "flags",
+    "scoreboard",
+    "leaderboard",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "Topic :: Security",
+    "Topic :: Education",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Shells",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "typer[all]>=0.9.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0",
+    "textual>=0.58.0",
+    "tomli>=2.0.0; python_version<'3.11'",
+    "tomli-w>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Sherin-SEF-AI/ctf-term"
+Documentation = "https://github.com/Sherin-SEF-AI/ctf-term/blob/main/README.md"
+Repository = "https://github.com/Sherin-SEF-AI/ctf-term"
+Issues = "https://github.com/Sherin-SEF-AI/ctf-term/issues"
+Author = "https://sherinjosephroy.link"
+Company = "https://deepmost.ai"
+
+[project.scripts]
+ctf = "ctfterm.cli:app"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "ruff>=0.1.0",
+    "black>=23.0.0",
+    "coverage>=7.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ctfterm"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"
+
+[tool.setuptools]
+package-dir = {"" = "src"}

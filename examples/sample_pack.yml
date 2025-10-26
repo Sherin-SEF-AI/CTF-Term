@@ -1,0 +1,24 @@
+pack: Sample Intro
+version: 1
+challenges:
+  - id: rot13-hello
+    title: Hello Crypto
+    category: crypto
+    description: |
+      Caesar shift by 13. Decrypt "synt" and wrap with flag{}.
+    points: 100
+    hint: Think ROT13.
+    hint_penalty: 20
+    salt: "s1"
+    flag_plain: "flag{flap}"
+  - id: warmup-read
+    title: Warmup Read
+    category: misc
+    description: |
+      The flag is hidden in this description: flag{read_the_desc}
+    points: 50
+    hint: Look closely at the text.
+    hint_penalty: 10
+    salt: "s2"
+    flag_plain: "flag{read_the_desc}"
+

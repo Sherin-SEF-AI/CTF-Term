@@ -1,0 +1,87 @@
+/* CTF Terminal TUI Styles */
+
+/* Dark theme (default) */
+:root {
+    --accent: #4fd1c5;
+    --bg: #0b1020;
+    --fg: #e6eef9;
+    --muted: #94a3b8;
+    --primary: #3b82f6;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --success: #10b981;
+    --surface: #1e293b;
+}
+
+/* Light theme */
+.light {
+    --bg: #f7fafc;
+    --fg: #0b1020;
+    --muted: #475569;
+    --accent: #2563eb;
+    --primary: #2563eb;
+    --warning: #d97706;
+    --error: #dc2626;
+    --success: #059669;
+    --surface: #ffffff;
+}
+
+Screen {
+    background: $bg;
+    color: $fg;
+}
+
+DataTable {
+    background: $surface;
+    border: solid $primary;
+}
+
+DataTable > .datatable--cursor {
+    background: $accent;
+}
+
+DataTable > .datatable--header {
+    background: $primary;
+    color: white;
+}
+
+Button {
+    border: solid $primary;
+}
+
+Button:hover {
+    background: $accent;
+}
+
+Input {
+    border: solid $primary;
+    background: $surface;
+}
+
+Input:focus {
+    border: solid $accent;
+}
+
+Label {
+    color: $fg;
+}
+
+Static {
+    color: $fg;
+}
+
+/* Dialogs */
+ConfirmDialog,
+HintDialog,
+SubmitDialog,
+UserSelectDialog {
+    background: $surface;
+    border: solid $primary;
+}
+
+/* Footer */
+Footer {
+    background: $surface;
+    border-top: solid $primary;
+}
+

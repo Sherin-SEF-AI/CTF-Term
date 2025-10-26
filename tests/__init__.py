@@ -1,0 +1,2 @@
+"""Tests for CTF Terminal."""
+
