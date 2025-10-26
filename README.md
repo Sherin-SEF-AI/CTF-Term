@@ -1,8 +1,25 @@
 # CTF Terminal 🚩
 
+[![PyPI version](https://badge.fury.io/py/ctf-term.svg)](https://badge.fury.io/py/ctf-term)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Stars](https://img.shields.io/github/stars/Sherin-SEF-AI/CTF-Term?style=social)](https://github.com/Sherin-SEF-AI/CTF-Term)
+
 **ctf-term** - A production-ready, cross-platform terminal CTF engine with both CLI and TUI interfaces. Features local SQLite storage, importable challenge packs (YAML), salted-hash flag verification, hint penalties, and live leaderboards.
 
 **Created by:** [Sherin Joseph Roy](https://sherinjosephroy.link) • Co-Founder & Head of Products at [DeepMost AI](https://deepmost.ai)
+
+## 📦 Install from PyPI
+
+```bash
+pip install ctf-term
+```
+
+**PyPI Package**: https://pypi.org/project/ctf-term/  
+**GitHub Repository**: https://github.com/Sherin-SEF-AI/CTF-Term  
+**Documentation**: See README.md
+
+> 💡 **Install**: `pip install ctf-term` • **PyPI**: https://pypi.org/project/ctf-term/
 
 ## Features
 
@@ -241,4 +258,6 @@ Built with:
 - [Rich](https://rich.readthedocs.io/) - Terminal formatting
 - [Textual](https://textual.textualize.io/) - TUI framework
 - [PyYAML](https://pyyaml.org/) - YAML parsing
+
+**Available on PyPI**: https://pypi.org/project/ctf-term/
 
